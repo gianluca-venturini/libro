@@ -10,7 +10,6 @@ filename = sys.argv[1]
 
 def read_file_in_chunks(filename, db, words_in_chunk=100):
     print(f"Loading {filename} book into database.")
-    chunks = []
     id = 0
     stats_line_processed = 0
     with open(filename, 'r') as file:
@@ -29,7 +28,10 @@ def read_file_in_chunks(filename, db, words_in_chunk=100):
                         print(f"Added {id} documents")
                         print(f"{stats_line_processed} lines processed")
             stats_line_processed += 1
-        chunks.append(words.copy())
+        collection.add(
+            documents=[' '.join(words)],
+            ids=[f"id{id}"]
+        )
     print('Finished loading the book into the database.')
 
 chroma_client = chromadb.PersistentClient(path=constants.DB_PATH)
