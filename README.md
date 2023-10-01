@@ -13,5 +13,5 @@ python3 ingest.py <book_name>
 
 - Talk to the book
 ```
-python3 talk.py <question>
+API_KEY=<open-api-key> python3 ask.py "<question>"
 ```
